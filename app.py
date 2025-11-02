@@ -78,10 +78,10 @@ def get_perpendicular_normal(seg_start, seg_end, incoming_dir):
 
 # --- Flask App Setup ---
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # --- Simulation Route ---
-@app.route('/simulate', methods=['POST'])
+@app.route('/api/simulate', methods=['POST'])
 def simulate():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
@@ -345,11 +345,11 @@ def simulate():
         }
     })
 
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def index():
     return jsonify({"msg": "Optical Simulator Backend is running."})
 
-@app.route('/health', methods=['GET'])
+@app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({"status": "healthy", "service": "optical-simulator"})
 
