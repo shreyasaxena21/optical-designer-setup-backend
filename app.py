@@ -345,6 +345,10 @@ def simulate():
         }
     })
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"msg": "Optical Simulator Backend is running."})
+
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({"status": "healthy", "service": "optical-simulator"})
